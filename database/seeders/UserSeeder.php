@@ -7,6 +7,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Ramsey\Uuid\Uuid;
+use App\Models\User;
+use App\Models\Region;
 
 class UserSeeder extends Seeder
 {
@@ -21,5 +23,17 @@ class UserSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => Hash::make('admin'),
         ]);
+
+        $user = User::find(1);
+        if ($user) {
+            $user->assignRole($adminRole);
+        }
+
+        if ($user) {
+            $region = Region::where('name', 'MÉXICO')->first();
+            if ($region) {
+                $user->regions()->attach($region->id);
+            }
+        }
     }
 }

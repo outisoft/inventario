@@ -8,14 +8,17 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Ramsey\Uuid\Uuid;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     public $incrementing = false; // Indicar que no es autoincremental
     protected $keyType = 'string';
-
-    use HasFactory, Notifiable;
+    protected $primaryKey = 'id';
+    
+    use HasFactory, Notifiable, HasUuids, HasRoles;
 
     /**
      * The attributes that are mass assignable.
