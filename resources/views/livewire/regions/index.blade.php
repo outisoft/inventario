@@ -11,10 +11,10 @@
             <thead class="bg-gray-50 dark:bg-neutral-800">
                 <tr>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Nombre
+                        Name
                     </th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Acciones
+                        Actions
                     </th>
                 </tr>
             </thead>
@@ -59,7 +59,9 @@
                     <flux:button variant="ghost">Cancelar</flux:button>
                 </flux:modal.close>
 
-                <flux:button wire:click="delete" variant="danger">Eliminar</flux:button>
+                <flux:modal.close>
+                    <flux:button wire:click="delete" variant="danger">Eliminar</flux:button>
+                </flux:modal.close>
             </div>
         </div>
     </flux:modal>

@@ -13,7 +13,7 @@ class Index extends Component
 
     public function mount()
     {
-        $this->regions = Region::all();
+        $this->regions = Region::orderBy('name', 'asc')->get();
     }
 
     public function confirmDelete($id)
@@ -25,8 +25,11 @@ class Index extends Component
     public function delete()
     {
         Region::findOrFail($this->regionIdToDelete)->delete();
-        $this->regions = Region::all();
+        $this->regions = Region::orderBy('name', 'asc')->get();
         $this->showDeleteModal = false;
+
+        toastr()->success('Region deleted successfully!');
+
     }
 
     public function render()

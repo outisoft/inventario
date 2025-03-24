@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use App\Livewire\Regions\CreateRegion;
 use App\Livewire\Regions\UpdateRegion;
+use App\Livewire\Policies\CreatePolicy;
+use App\Livewire\Policies\EditPolicy;
+use App\Livewire\Users\CreateUser;
+use App\Livewire\Users\EditUser;
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,13 +37,24 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('history', 'history')->name('history');
     Volt::route('assignments', 'assignments')->name('assignments');
 
-    Volt::route('users', 'users')->name('users');
-    
-    Volt::route('regions', 'regions')->name('regions');
-    Route::get('regions/create', CreateRegion::class)->name('regions.create');
-    Route::get('regions/{id}/edit', UpdateRegion::class)->name('regions.edit');
+    Route::prefix('users')->group(function () {
+        Volt::route('/', 'users')->name('users');
+        Route::get('/create', CreateUser::class)->name('users.create');
+        Route::get('/edit/{id}', EditUser::class)->name('users.edit');
+    });
 
-    Volt::route('policies', 'policies')->name('policies');
+    Route::prefix('regions')->group(function () {
+        Volt::route('/', 'regions')->name('regions');
+        Route::get('/create', CreateRegion::class)->name('regions.create');
+        Route::get('/edit/{id}', UpdateRegion::class)->name('regions.edit');
+    });
+
+    Route::prefix('policies')->group(function () {
+        Volt::route('/', 'policies')->name('policies');
+        Route::get('/create', CreatePolicy::class)->name('policies.create');
+        Route::get('/edit/{id}', EditPolicy::class)->name('policies.edit');
+    });
+
     Volt::route('hotels', 'hotels')->name('hotels');
     Volt::route('roles', 'roles')->name('roles');
     Volt::route('backup', 'backup')->name('backup');

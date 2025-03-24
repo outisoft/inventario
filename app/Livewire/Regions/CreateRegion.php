@@ -23,6 +23,8 @@ class CreateRegion extends Component
             'name' => $this->name,
         ]);
 
+        toastr()->success('Region saved successfully!');
+
         return redirect()->route('regions');
     }
 

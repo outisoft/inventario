@@ -32,6 +32,8 @@ class UpdateRegion extends Component
             'name' => $this->name,
         ]);
 
+        toastr()->success('Region updated successfully!');
+
         return redirect()->route('regions');
     }
 

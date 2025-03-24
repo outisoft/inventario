@@ -62,6 +62,11 @@ class User extends Authenticatable
             ->implode('');
     }
 
+    public function regions()
+    {
+        return $this->belongsToMany(Region::class, 'region_user', 'user_id', 'region_id');
+    }
+
     protected static function boot() //guardar en mayusculas
     {
         parent::boot();
