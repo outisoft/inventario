@@ -12,6 +12,14 @@
             </div>
 
             <div class="mb-4">   
+                <flux:select size="sm" placeholder="Choose rol..." name="rol" id="rol" wire:model="rol" label="Rol" required>
+                    @foreach($roles as $rol)
+                        <flux:select.option value="{{ $rol->name }}">{{ $rol->name }}</flux:select.option>
+                    @endforeach
+                </flux:select>
+            </div>
+
+            <div class="mb-4">   
                 <flux:select size="sm" placeholder="Choose industry..." name="regions[]" id="regions" wire:model="region_ids" multiple label="Region" required>
                     @foreach($regions as $region)
                         <flux:select.option value="{{ $region->id }}">{{ $region->name }}</flux:select.option>

@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Region;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Spatie\Permission\Models\Role as Rol;
+
 
 class CreateUser extends Component
 {
@@ -20,6 +22,7 @@ class CreateUser extends Component
     public function mount()
     {
         $this->regions = Region::orderBy('name', 'asc')->get();
+        $this->roles = Rol::orderBy('name', 'asc')->get();
     }
 
     public function createUser()
@@ -27,6 +30,7 @@ class CreateUser extends Component
         $this->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'rol' => 'required|exists:roles,name',
             'region_ids' => 'required|array',
             'region_ids.*' => 'exists:regions,id',
             'password' => 'required|string|min:8|same:password_confirmation',
@@ -39,6 +43,9 @@ class CreateUser extends Component
             'password' => Hash::make($this->password),
         ]);
 
+        $role = Rol::findByName($validatedData['rol']);
+        $user->assignRole($role);
+
         $user->regions()->sync($this->region_ids);
 
         session()->flash('message', 'Usuario creado exitosamente.');
@@ -48,6 +55,6 @@ class CreateUser extends Component
 
     public function render()
     {
-        return view('livewire.users.create', ['regions' => $this->regions]);
+        return view('livewire.users.create', ['regions' => $this->regions], ['roles' => $this->roles]);
     }
 }

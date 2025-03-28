@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use Ramsey\Uuid\Uuid;
 use App\Models\User;
 use App\Models\Region;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class UserSeeder extends Seeder
 {
@@ -24,7 +26,10 @@ class UserSeeder extends Seeder
             'password' => Hash::make('admin'),
         ]);
 
-        $user = User::find(1);
+        $user = User::where('email', 'admin@admin.com')->first();
+
+        $adminRole = Role::firstOrCreate(['name' => 'Administrator']);
+
         if ($user) {
             $user->assignRole($adminRole);
         }
