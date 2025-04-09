@@ -25,9 +25,8 @@ class CreateHotel extends Component
             'type' => 'required|min:3',
             'region_id' => 'required|min:3',
         ],[
-            'name.required' => 'El nombre de la politica es obligatorio.',
-            'name.string' => 'El nombre de la politica debe ser una cadena de texto.',
-            'name.max' => 'El nombre de la politica no puede tener más de 255 caracteres.',
+            'name.required' => 'El nombre del hotel es obligatorio.',
+            'region_id.required' => 'La region del hotel es obligatorio.',
         ]);
 
         $hotel = Hotel::create([

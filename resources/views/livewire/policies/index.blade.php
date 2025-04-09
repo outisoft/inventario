@@ -50,10 +50,10 @@
     <flux:modal name="delete-profile" class="min-w-[22rem]">
         <div class="space-y-6">
             <div>
-                <flux:heading size="lg">¿Eliminar región?</flux:heading>
+                <flux:heading size="lg">¿Eliminar politica?</flux:heading>
 
                 <flux:text class="mt-2">
-                    <p>Estás a punto de eliminar esta región.</p>
+                    <p>Estás a punto de eliminar esta politica.</p>
                     <p>Esta acción no se puede deshacer.</p>
                 </flux:text>
             </div>

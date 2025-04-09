@@ -12,6 +12,7 @@ class EditHotel extends Component
     public $name;
     public $type;
     public $region_id;
+    public $regions; 
 
     public function mount($id)
     {
@@ -19,7 +20,7 @@ class EditHotel extends Component
         $this->hotelId = $hotel->id;
         $this->name = $hotel->name;
         $this->type = $hotel->type;
-        $this->region_id = $hotel->region_id;
+        $this->region_id = strtolower($hotel->region_id); 
         $this->regions = Region::orderBy('name', 'asc')->get();
     }
 

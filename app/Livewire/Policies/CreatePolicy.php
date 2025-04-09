@@ -4,23 +4,31 @@ namespace App\Livewire\Policies;
 
 use Livewire\Component;
 use App\Models\Policy;
+use App\Models\Region;
 
 class CreatePolicy extends Component
 {
     public $name;
+    public $region_id;
+
+    public function mount()
+    {
+        $this->regions = Region::orderBy('name', 'asc')->get();
+    }
 
     public function createPolicy()
     {
         $this->validate([
-            'name' => 'required|min:3|unique:policy,name',
+            'name' => 'required|min:3',
+            'region_id' => 'required|min:3',
         ],[
             'name.required' => 'El nombre de la politica es obligatorio.',
-            'name.string' => 'El nombre de la politica debe ser una cadena de texto.',
-            'name.max' => 'El nombre de la politica no puede tener más de 255 caracteres.',
+            'region_id.required' => 'La region de la politica es obligatorio.',
         ]);
 
-        Policy::create([
+        $policy = Policy::create([
             'name' => $this->name,
+            'region_id' => $this->region_id,
         ]);
 
         toastr()->success('Policy saved successfully!');
@@ -30,6 +38,8 @@ class CreatePolicy extends Component
 
     public function render()
     {
-        return view('livewire.policies.create');
+        return view('livewire.policies.create', [
+            'regions' => $this->regions,
+        ]);
     }
 }
