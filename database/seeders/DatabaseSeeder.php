@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             RegionSeeder::class,
             RoleSeeder::class,
             UserSeeder::class,
+            HotelSeeder::class,
         ]);
     }
 }

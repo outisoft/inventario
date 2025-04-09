@@ -13,8 +13,9 @@
 
             <div class="mb-4">   
                 <flux:select size="sm" placeholder="Choose rol..." name="rol" id="rol" wire:model="rol" label="Rol" required>
-                    @foreach($roles as $rol)
-                        <flux:select.option value="{{ $rol->name }}">{{ $rol->name }}</flux:select.option>
+                    <flux:select.option value="" disabled selected>Seleccione un rol</flux:select.option>
+                    @foreach($roles as $role)
+                        <flux:select.option value="{{ $role->id }}">{{ $role->name }}</flux:select.option>
                     @endforeach
                 </flux:select>
             </div>
@@ -54,7 +55,7 @@
 
             <br>
 
-            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md">Agregar Usuario</button>
+            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md">Save</button>
         </form>
     </div>
 </div>

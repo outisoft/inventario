@@ -8,6 +8,10 @@ use App\Livewire\Policies\CreatePolicy;
 use App\Livewire\Policies\EditPolicy;
 use App\Livewire\Users\CreateUser;
 use App\Livewire\Users\EditUser;
+use App\Livewire\Roles\CreateRole;
+use App\Livewire\Roles\EditRole;
+use App\Livewire\Hotels\CreateHotel;
+use App\Livewire\Hotels\EditHotel;
 
 Route::get('/', function () {
     return view('welcome');
@@ -55,8 +59,19 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/edit/{id}', EditPolicy::class)->name('policies.edit');
     });
 
-    Volt::route('hotels', 'hotels')->name('hotels');
-    Volt::route('roles', 'roles')->name('roles');
+    Route::prefix('hotels')->group(function () {
+        Volt::route('/', 'hotels')->name('hotels');
+        Route::get('/create', CreateHotel::class)->name('hotels.create');
+        Route::get('/edit/{id}', EditHotel::class)->name('hotels.edit');
+    });
+
+    Route::prefix('roles')->group(function () {
+        Volt::route('/', 'roles')->name('roles');
+        Route::get('/create', CreateRole::class)->name('roles.create');
+        Route::get('/edit/{roleId}', EditRole::class)->name('roles.edit');
+    });
+
+
     Volt::route('backup', 'backup')->name('backup');
 
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');

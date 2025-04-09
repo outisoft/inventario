@@ -7,8 +7,7 @@ use App\Models\User;
 use App\Models\Region;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-use Spatie\Permission\Models\Role as Rol;
-
+use Spatie\Permission\Models\Role;
 
 class CreateUser extends Component
 {
@@ -18,19 +17,21 @@ class CreateUser extends Component
     public $password_confirmation;
     public $region_ids = [];
     public $regions;
+    public $roles; // Propiedad para almacenar los roles
+    public $rol = null;  // Propiedad para el rol seleccionado
 
     public function mount()
     {
         $this->regions = Region::orderBy('name', 'asc')->get();
-        $this->roles = Rol::orderBy('name', 'asc')->get();
+        $this->roles = Role::orderBy('name', 'asc')->get();
     }
 
     public function createUser()
-    {
+    {        
         $this->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'rol' => 'required|exists:roles,name',
+            'rol' => 'required|exists:roles,id',
             'region_ids' => 'required|array',
             'region_ids.*' => 'exists:regions,id',
             'password' => 'required|string|min:8|same:password_confirmation',
@@ -43,7 +44,7 @@ class CreateUser extends Component
             'password' => Hash::make($this->password),
         ]);
 
-        $role = Rol::findByName($validatedData['rol']);
+        $role = Role::find($this->rol); // Usar el ID en lugar del nombre
         $user->assignRole($role);
 
         $user->regions()->sync($this->region_ids);
@@ -55,6 +56,9 @@ class CreateUser extends Component
 
     public function render()
     {
-        return view('livewire.users.create', ['regions' => $this->regions], ['roles' => $this->roles]);
+        return view('livewire.users.create', [
+            'regions' => $this->regions,
+            'roles' => $this->roles,
+        ]);
     }
 }

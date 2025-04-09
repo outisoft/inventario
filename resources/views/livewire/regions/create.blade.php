@@ -5,7 +5,7 @@
             <div class="mb-4">            
                 <flux:input type="text" id="name" wire:model="name" label="Name" description="Enter the name of the region or country" required/>
             </div>
-            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md">Agregar Región</button>
+            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md">Save</button>
         </form>
     </div>
 </div>
