@@ -30,6 +30,7 @@ class Index extends Component
 
         toastr()->success('Hotel deleted successfully!');
 
+        return redirect()->route('hotels');
     }
 
     public function render()

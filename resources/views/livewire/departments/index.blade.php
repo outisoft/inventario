@@ -1,10 +1,9 @@
 <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
-
-    @include('livewire.nav-bar.nav-bar')
+    @include('livewire.nav-bar.nav-bar')    
 
     <!-- Botón para agregar una nueva hotel -->
     <div class="p-4 bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-700">
-        <a href="{{ route('hotels.create') }}" class="px-4 py-2">
+        <a href="{{ route('departments.create') }}" class="px-4 py-2">
             <flux:button icon="plus-circle"></flux:button>
         </a>
     </div>
@@ -17,10 +16,7 @@
                         Name
                     </th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Type
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Region
+                        Hotel
                     </th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Actions
@@ -28,24 +24,21 @@
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-neutral-900 divide-y divide-gray-200 dark:divide-neutral-700">
-                @foreach($hotels as $hotel)
+                @foreach($departments as $department)
                     <tr>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
-                            {{ $hotel->name }}
+                            {{ $department->name }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
-                            {{ $hotel->type }}
+                            {{ $department->hotels->name }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
-                            {{ $hotel->region->name }}
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
-                            <a href="{{ route('hotels.edit', $hotel->id) }}" class="px-4 py-2">
+                            <a href="{{ route('departments.edit', $department->id) }}" class="px-4 py-2">
                                 <flux:button variant="filled" icon="pencil-square"></flux:button>
                             </a>
                             
                             <!-- Botón para eliminar la hotel -->
-                            <flux:modal.trigger name="delete-profile" class="px-4 py-2" wire:click="confirmDelete('{{ $hotel->id }}')">
+                            <flux:modal.trigger name="delete-profile" class="px-4 py-2" wire:click="confirmDelete('{{ $department->id }}')">
                                 <flux:button variant="danger" icon="trash"></flux:button>
                             </flux:modal.trigger>
                         </td>
@@ -59,10 +52,10 @@
     <flux:modal name="delete-profile" class="min-w-[22rem]">
         <div class="space-y-6">
             <div>
-                <flux:heading size="lg">¿Eliminar hotel?</flux:heading>
+                <flux:heading size="lg">¿Eliminar departamento?</flux:heading>
 
                 <flux:text class="mt-2">
-                    <p>Estás a punto de eliminar este hotel.</p>
+                    <p>Estás a punto de eliminar este departamento.</p>
                     <p>Esta acción no se puede deshacer.</p>
                 </flux:text>
             </div>
