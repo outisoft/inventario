@@ -48,7 +48,8 @@
                         :href="route('hotels')" 
                         :current="request()->routeIs('hotels') || request()->routeIs('hotels.create') || request()->routeIs('hotels.edit') || 
                                 request()->routeIs('departments') || request()->routeIs('departments.create') || request()->routeIs('departments.edit') ||
-                                request()->routeIs('villas') || request()->routeIs('villas.create') || request()->routeIs('villas.edit')" 
+                                request()->routeIs('villas') || request()->routeIs('villas.create') || request()->routeIs('villas.edit') || 
+                                request()->routeIs('rooms') || request()->routeIs('rooms.create') || request()->routeIs('rooms.edit')" 
                         wire:navigate>{{ __('Hotels & More') }}</flux:navlist.item>
                     <flux:navlist.item icon="flag" :href="route('regions')" :current="request()->routeIs('regions') || request()->routeIs('regions.create') || request()->routeIs('regions.edit')" wire:navigate>{{ __('Regions') }}</flux:navlist.item>
                     <flux:navlist.item icon="lock-closed" :href="route('roles')" :current="request()->routeIs('roles') || request()->routeIs('roles.create') || request()->routeIs('roles.edit')" wire:navigate>{{ __('Roles & Permissions') }}</flux:navlist.item>

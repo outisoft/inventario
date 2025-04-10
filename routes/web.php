@@ -16,6 +16,8 @@ use App\Livewire\Departments\CreateDepartment;
 use App\Livewire\Departments\EditDepartment;
 use App\Livewire\Villas\CreateVilla;
 use App\Livewire\Villas\EditVilla;
+use App\Livewire\Rooms\CreateRoom;
+use App\Livewire\Rooms\EditRoom;
 
 Route::get('/', function () {
     return view('welcome');
@@ -79,6 +81,12 @@ Route::middleware(['auth'])->group(function () {
         Volt::route('/', 'villas')->name('villas');
         Route::get('/create', CreateVilla::class)->name('villas.create');
         Route::get('/edit/{id}', EditVilla::class)->name('villas.edit');
+    });
+
+    Route::prefix('rooms')->group(function () {
+        Volt::route('/', 'rooms')->name('rooms');
+        Route::get('/create', CreateRoom::class)->name('rooms.create');
+        Route::get('/edit/{id}', EditRoom::class)->name('rooms.edit');
     });
 
     Route::prefix('roles')->group(function () {
