@@ -43,7 +43,13 @@
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Administrator')" class="grid">
                     <flux:navlist.item icon="user-group" :href="route('users')" :current="request()->routeIs('users') || request()->routeIs('users.create') || request()->routeIs('regions.edit') " wire:navigate>{{ __('Users') }}</flux:navlist.item>
-                    <flux:navlist.item icon="building-office-2" :href="route('hotels')" :current="request()->routeIs('hotels') || request()->routeIs('hotels.create') || request()->routeIs('hotels.edit') || request()->routeIs('departments') || request()->routeIs('departments.create') || request()->routeIs('departments.edit')" wire:navigate>{{ __('Hotels & more') }}</flux:navlist.item>
+                    <flux:navlist.item 
+                        icon="building-office-2" 
+                        :href="route('hotels')" 
+                        :current="request()->routeIs('hotels') || request()->routeIs('hotels.create') || request()->routeIs('hotels.edit') || 
+                                request()->routeIs('departments') || request()->routeIs('departments.create') || request()->routeIs('departments.edit') ||
+                                request()->routeIs('villas') || request()->routeIs('villas.create') || request()->routeIs('villas.edit')" 
+                        wire:navigate>{{ __('Hotels & More') }}</flux:navlist.item>
                     <flux:navlist.item icon="flag" :href="route('regions')" :current="request()->routeIs('regions') || request()->routeIs('regions.create') || request()->routeIs('regions.edit')" wire:navigate>{{ __('Regions') }}</flux:navlist.item>
                     <flux:navlist.item icon="lock-closed" :href="route('roles')" :current="request()->routeIs('roles') || request()->routeIs('roles.create') || request()->routeIs('roles.edit')" wire:navigate>{{ __('Roles & Permissions') }}</flux:navlist.item>
                     <flux:navlist.item icon="clipboard-document-list" :href="route('policies')" :current="request()->routeIs('policies') || request()->routeIs('policies.create') || request()->routeIs('policies.edit')" wire:navigate>{{ __('Policies') }}</flux:navlist.item>
