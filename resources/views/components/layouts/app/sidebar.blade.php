@@ -11,6 +11,8 @@
                 <x-app-logo />
             </a>
 
+            <flux:input as="button" variant="filled" placeholder="Search..." icon="magnifying-glass" />
+
             <flux:navlist variant="outline">
                 <flux:navlist.group class="grid">
                     <flux:navlist.item icon="home" :href="route('home')" :current="request()->routeIs('home')" wire:navigate>{{ __('Home') }}</flux:navlist.item>

@@ -18,6 +18,8 @@ use App\Livewire\Villas\CreateVilla;
 use App\Livewire\Villas\EditVilla;
 use App\Livewire\Rooms\CreateRoom;
 use App\Livewire\Rooms\EditRoom;
+use App\Livewire\Position\Create as PositionCreate;
+use App\Livewire\Position\Edit as EditPosition;
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,8 +32,7 @@ Route::view('home', 'home')
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
 
-    Volt::route('employees', 'employees')->name('employees');
-    Volt::route('positions', 'positions')->name('positions');
+    Volt::route('employees', 'employee')->name('employees');
     Volt::route('equipments/laptops', 'equipments.laptops')->name('equipments.laptops');
     Volt::route('equipments/desktops', 'equipments.desktops')->name('equipments.desktops');
     Volt::route('equipments/printers', 'equipments.printers')->name('equipments.printers');
@@ -46,6 +47,14 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('leases', 'leases')->name('leases');
     Volt::route('history', 'history')->name('history');
     Volt::route('assignments', 'assignments')->name('assignments');
+
+    //Volt::route('positions', 'position')->name('positions');
+    
+    Route::prefix('positions')->group(function () {
+        Volt::route('/', 'position')->name('positions');
+        Route::get('/create', PositionCreate::class)->name('positions.create');
+        Route::get('/edit/{id}', EditPosition::class)->name('positions.edit');
+    });
 
     Route::prefix('users')->group(function () {
         Volt::route('/', 'users')->name('users');
@@ -94,7 +103,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/create', CreateRole::class)->name('roles.create');
         Route::get('/edit/{roleId}', EditRole::class)->name('roles.edit');
     });
-
 
     Volt::route('backup', 'backup')->name('backup');
 
