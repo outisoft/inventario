@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->integer('no_employe')->unique();
+            $table->integer('no_employee')->unique();
             $table->foreignUuid('position_id')->nullable()->constrained('positions')->onDelete('set null');
             $table->foreignUuid('region_id')->references('id')->on('regions')->onDelete('cascade');
             $table->timestamps();

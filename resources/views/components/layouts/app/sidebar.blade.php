@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
     <head>
         @include('partials.head')
+        @livewireStyles
     </head>
     <body class="min-h-screen bg-white dark:bg-zinc-800">
         <flux:sidebar sticky stashable class="border-r border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
@@ -10,8 +11,8 @@
             <a href="{{ route('home') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
                 <x-app-logo />
             </a>
-
-            <flux:input as="button" variant="filled" placeholder="Search..." icon="magnifying-glass" />
+            
+            <flux:input icon="magnifying-glass" placeholder="Search..." />
 
             <flux:navlist variant="outline">
                 <flux:navlist.group class="grid">
@@ -158,6 +159,7 @@
 
         {{ $slot }}
 
+        @livewireScripts
         @fluxScripts
     </body>
 </html>

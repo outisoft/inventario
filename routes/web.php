@@ -20,6 +20,10 @@ use App\Livewire\Rooms\CreateRoom;
 use App\Livewire\Rooms\EditRoom;
 use App\Livewire\Position\Create as PositionCreate;
 use App\Livewire\Position\Edit as EditPosition;
+use App\Livewire\Employee\Create as CreateEmployee;
+use App\Livewire\Employee\Edit as EditEmployee;
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -48,7 +52,11 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('history', 'history')->name('history');
     Volt::route('assignments', 'assignments')->name('assignments');
 
-    //Volt::route('positions', 'position')->name('positions');
+    Route::prefix('employees')->group(function () {
+        Volt::route('/', 'employee')->name('employees');
+        Route::get('/create', CreateEmployee::class)->name('employees.create');
+        Route::get('/edit/{id}', EditEmployee::class)->name('employees.edit');
+    });
     
     Route::prefix('positions')->group(function () {
         Volt::route('/', 'position')->name('positions');
